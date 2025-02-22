@@ -71,13 +71,13 @@ export default function Index() {
       setDomainStatus(prev => {
         const domain = prev[result.domain];
         const newHistory = [
+          ...domain.pingHistory,
           {
             status: result.error ? 'error' : 'success',
             latency: result.latencyMs,
             timestamp: result.timestamp
-          },
-          ...domain.pingHistory
-        ].slice(0, MAX_HISTORY);
+          }
+        ].slice(-MAX_HISTORY);  // Take last MAX_HISTORY items
 
         return {
           ...prev,
