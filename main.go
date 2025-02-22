@@ -86,7 +86,7 @@ func main() {
 	app := pocketbase.New()
 
 	for _, domain := range domains {
-		app.Cron().MustAdd(domain, "0 * * * *", ping(domain))
+		app.Cron().MustAdd(domain, "* * * * *", ping(domain))
 		// Initial ping on startup
 		go ping(domain)()
 	}
